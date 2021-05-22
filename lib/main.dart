@@ -32,6 +32,7 @@ class _QuizPageState extends State<QuizPage> {
     'Approximately one quarter of human bones are in the feet.',
     'A slug\'s blood is green.',
   ];
+  List<bool> answer=[false,true,false];
   int questionNumber = 0;
   @override
   Widget build(BuildContext context) {
@@ -71,11 +72,23 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true.
-                questionNumber++;      //questionNumber=questionNumber + 1;
+                bool correctanswer =answer[questionNumber];
+                if(correctanswer==true)
+                  {
+                    print('user got it right');
+                  }
+                else
+                  {
+                    print('user got it wrong');
+                  }
+
+
+
+
                 setState(() {
-                  print(questionNumber);
+                  questionNumber++;     //questionNumber=questionNumber + 1;
                 });
-                ;
+                print(questionNumber);
 
               },
             ),
@@ -95,8 +108,17 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
+                bool correctanswer =answer[questionNumber];
+                if(correctanswer==false)
+                {
+                  print('user got it right');
+                }
+                else
+                {
+                  print('user got it wrong');
+                }
                 setState(() {
-                  questionNumber++;
+                  questionNumber++;     //questionNumber=questionNumber + 1;
                 });
 
                 print(questionNumber);
