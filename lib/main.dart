@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'quiz_brain.dart';
 
@@ -28,6 +29,24 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scorekeeper = [];
+  void checkAnswer(bool userpickedAnswer) {
+    bool correctAnswer = quizbrain.getCorrectAnswer();
+    setState(() {
+      if (userpickedAnswer == correctAnswer) {
+        scorekeeper.add(Icon(
+          Icons.check,
+          color: Colors.green,
+        ));
+      } else {
+        scorekeeper.add(Icon(
+          Icons.close,
+          color: Colors.red,
+        ));
+      }
+
+      quizbrain.nextQuestion(); //questionNumber=questionNumber + 1;
+    });
+  }
   // List<String> question =[
   // 'You can lead a cow down stairs but not up stairs.',
   //'Approximately one quarter of human bones are in the feet.',
@@ -74,17 +93,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 //The user picked true.
 
-               // quizbrain.questionBank[questionNumber].questionAnswer = true;
-                bool correctAnswer = quizbrain.getCorrectAnswer();
-                if (correctAnswer == true) {
-                  print('user got it right');
-                } else {
-                  print('user got it wrong');
-                }
-                setState(() {
-                  quizbrain.nextQuestion(); //questionNumber=questionNumber + 1;
-                });
-
+                checkAnswer(true);
               },
             ),
           ),
@@ -104,17 +113,8 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 //The user picked false.
 
-               // quizbrain.questionBank[questionNumber].questionAnswer = false;
-                bool correctAnswer = quizbrain.getCorrectAnswer();
-
-                if (correctAnswer == false) {
-                  print('user got it right');
-                } else {
-                  print('user got it wrong');
-                }
-                setState(() {
-                  quizbrain.nextQuestion(); //questionNumber=questionNumber + 1;
-                });
+                // quizbrain.questionBank[questionNumber].questionAnswer = false;
+                checkAnswer(false);
               },
             ),
           ),
